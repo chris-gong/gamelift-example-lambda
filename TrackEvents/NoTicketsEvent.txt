@@ -1,0 +1,9 @@
+{
+  "Records": [
+    {
+      "Sns": {
+        "Message": "{\"detail-type\":\"GameLift Matchmaking Event\", \"detail\":{\"tickets\":[]}}"
+      }
+    }
+  ]
+}
