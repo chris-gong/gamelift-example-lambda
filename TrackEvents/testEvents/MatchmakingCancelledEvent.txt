@@ -1,0 +1,9 @@
+{
+  "Records": [
+    {
+      "Sns": {
+        "Message": "{\"detail-type\":\"GameLift Matchmaking Event\", \"detail\":{\"type\":\"MatchmakingCancelled\", \"tickets\":[{\"ticketId\":\"t1\",\"startTime\":\"2020-04-01T22:58:26.169Z\",\"players\":[{\"playerId\":\"p1\"}]}]}}"
+      }
+    }
+  ]
+}
