@@ -1,0 +1,6 @@
+{
+  "queryStringParameters": {
+    "error": "invalid_request",
+    "error_description": "PreSignUp failed with error An account already exists for that email. "
+  }
+}
