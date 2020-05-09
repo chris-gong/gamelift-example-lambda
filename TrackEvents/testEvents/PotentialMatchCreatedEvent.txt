@@ -2,7 +2,7 @@
   "Records": [
     {
       "Sns": {
-        "Message": "{\"detail-type\":\"GameLift Matchmaking Event\", \"detail\":{\"type\":\"MatchmakingSucceeded\", \"tickets\":[{\"ticketId\":\"t3\",\"startTime\":\"2020-04-01T22:58:26.169Z\",\"players\":[{\"playerId\":\"p1\",\"team\":\"aliens\"}, {\"playerId\":\"p2\",\"team\":\"cowboys\"}]}], \"gameSessionInfo\":{\"ipAddress\":\"127.0.0.1\",\"port\":7777}}}"
+        "Message": "{\"detail-type\":\"GameLift Matchmaking Event\", \"detail\":{\"type\":\"PotentialMatchCreated\", \"tickets\":[{\"ticketId\":\"t3\",\"startTime\":\"2020-04-01T22:58:26.169Z\",\"players\":[{\"playerId\":\"p1\",\"team\":\"aliens\"}, {\"playerId\":\"p2\",\"team\":\"cowboys\"}]}]}}"
       }
     }
   ]
