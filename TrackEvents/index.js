@@ -1,13 +1,5 @@
 const AWS = require('aws-sdk');
 const DynamoDb = new AWS.DynamoDB({region: 'us-east-1'});
-const TypeToRank = {
-    MatchmakingSearching: '1',
-    PotentialMatchCreated: '2',
-    MatchmakingSucceeded: '3',
-    MatchmakingTimedOut: '4',
-    MatchmakingCancelled: '5',
-    MatchmakingFailed: '6'
-};
 
 exports.handler = async (event) => {
     let message;
@@ -48,38 +40,39 @@ exports.handler = async (event) => {
         return response;
     }
     
-    for (const ticket of messageDetail.tickets) {
-        const ticketItem = {};
-        ticketItem.Id = {S: ticket.ticketId};
-        ticketItem.Rank = {N: TypeToRank[messageDetail.type]};
-        ticketItem.Type = {S: messageDetail.type};
-        ticketItem.ttl = {N: (Math.floor(Date.now() / 1000) + 3600).toString()};
-        
-        if (messageDetail.type == 'MatchmakingSucceeded') {
-            ticketItem.Players = {L: []};
-            const players = ticket.players;
+    if (messageDetail.type == 'MatchmakingSucceeded' || messageDetail.type == 'MatchmakingTimedOut' || messageDetail.type == 'MatchmakingCancelled' || messageDetail.type == 'MatchmakingFailed') {
+        for (const ticket of messageDetail.tickets) {
+            const ticketItem = {};
+            ticketItem.Id = {S: ticket.ticketId};
+            ticketItem.Type = {S: messageDetail.type};
+            ticketItem.ttl = {N: (Math.floor(Date.now() / 1000) + 3600).toString()};
             
-            for (const player of players) {
-                const playerItem = {M: {}};
-                playerItem.M.PlayerId = {S: player.playerId};
-                playerItem.M.PlayerSessionId = {S: player.playerSessionId};
+            if (messageDetail.type == 'MatchmakingSucceeded') {
+                ticketItem.Players = {L: []};
+                const players = ticket.players;
                 
-                ticketItem.Players.L.push(playerItem);
+                for (const player of players) {
+                    const playerItem = {M: {}};
+                    playerItem.M.PlayerId = {S: player.playerId};
+                    playerItem.M.PlayerSessionId = {S: player.playerSessionId};
+                    
+                    ticketItem.Players.L.push(playerItem);
+                }
+                
+                ticketItem.GameSessionInfo = {
+                    M: {
+                        IpAddress: {S: messageDetail.gameSessionInfo.ipAddress},
+                        Port: {N: messageDetail.gameSessionInfo.port.toString()}
+                    }
+                };
             }
             
-            ticketItem.GameSessionInfo = {
-                M: {
-                    IpAddress: {S: messageDetail.gameSessionInfo.ipAddress},
-                    Port: {N: messageDetail.gameSessionInfo.port.toString()}
+            dynamoDbRequestParams.RequestItems.MatchmakingTickets.push({
+                PutRequest: {
+                    Item: ticketItem
                 }
-            };
+            });
         }
-        
-        dynamoDbRequestParams.RequestItems.MatchmakingTickets.push({
-            PutRequest: {
-                Item: ticketItem
-            }
-        });
     }
     
     await DynamoDb.batchWriteItem(dynamoDbRequestParams)
