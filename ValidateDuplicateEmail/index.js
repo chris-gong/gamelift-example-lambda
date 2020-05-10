@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk');
-const Cognito = new AWS.CognitoIdnetityServiceProvider({region: 'us-east-1'});
+const Cognito = new AWS.CognitoIdentityServiceProvider({region: 'us-east-1'});
 
 exports.handler = async (event) => {
     if (event.userName && event.userPoolId && event.request && event.request.userAttributes && event.request.userAttributes.email) {
