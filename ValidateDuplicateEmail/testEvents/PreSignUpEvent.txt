@@ -1,6 +1,6 @@
 {
   "userName": "bob",
-  "userPoolId": <insert-your-user-pool-id-here>,
+  "userPoolId": "<insert-your-user-pool-id-here>",
   "request": {
     "userAttributes": {
       "email": "bob@gmail.com"
