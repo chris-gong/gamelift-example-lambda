@@ -18,7 +18,7 @@ exports.handler = async (event) => {
             body: JSON.stringify({
                 error: 'no message available or message is not about gamelift matchmaking'
             })
-        }
+        };
         return response;
     }
     
