@@ -1,0 +1,8 @@
+{
+  "triggerSource": "PostConfirmation_ConfirmSignUp",
+  "request": {
+    "userAttributes": {
+      "sub": "test123"
+    }
+  }
+}
