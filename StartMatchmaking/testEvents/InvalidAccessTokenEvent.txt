@@ -1,0 +1,6 @@
+{
+  "body": "{\"latencyMap\":{\"<insert-region-code-here>\":60}}",
+  "headers": {
+    "Authorization": "dummy"
+  }
+}
