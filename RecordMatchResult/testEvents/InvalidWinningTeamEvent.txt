@@ -1,0 +1,3 @@
+{
+  "body":"{\"gameSessionId\":\"dummy\",\"winningTeam\":\"airplanes\"}"
+}

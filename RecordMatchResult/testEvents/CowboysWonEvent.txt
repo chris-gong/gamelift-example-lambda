@@ -1,0 +1,3 @@
+{
+  "body":"{\"gameSessionId\":\"<insert-valid-game-session-id-here>\",\"winningTeam\":\"cowboys\"}"
+}
