@@ -3,7 +3,7 @@ exports.handler = async (event, context, callback) => {
     
     if (authCode == 'dummy') {
         const policy = {
-            Version: '2012-10-07',
+            Version: '2012-10-17',
             Statement: []
         };
         
