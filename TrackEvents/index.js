@@ -54,7 +54,9 @@ exports.handler = async (event) => {
                 for (const player of players) {
                     const playerItem = {M: {}};
                     playerItem.M.PlayerId = {S: player.playerId};
-                    playerItem.M.PlayerSessionId = {S: player.playerSessionId};
+                    if (player.playerSessionId) {
+                        playerItem.M.PlayerSessionId = {S: player.playerSessionId};
+                    }
                     
                     ticketItem.Players.L.push(playerItem);
                 }
